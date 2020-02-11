@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2018 at 08:00 PM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.9
+-- Generation Time: Feb 11, 2020 at 08:26 AM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `lastnews`
+-- Database: `news`
 --
 
 -- --------------------------------------------------------
@@ -43,6 +43,35 @@ INSERT INTO `category` (`ID`, `Name`) VALUES
 (3, 'بازیگران'),
 (4, 'اتفاقات تازه در سینما'),
 (5, 'بهترین ها در سینما');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf8_persian_ci NOT NULL,
+  `body` text COLLATE utf8_persian_ci NOT NULL,
+  `news_id` int(11) NOT NULL,
+  `approve` tinyint(1) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `name`, `body`, `news_id`, `approve`, `created_at`) VALUES
+(1, 'adasd', 'sadsasdsa', 10, 1, '2020-02-11 10:36:19'),
+(2, 'محمد طهوریان', 'سلام عالی', 10, 1, '2020-02-11 10:39:55'),
+(3, 'محمد طهوریان', 'سلام عالی', 10, 1, '2020-02-11 10:41:33'),
+(4, 'محمد طهوریان', 'سلام عالی', 10, 1, '2020-02-11 10:42:08'),
+(5, 'yreur', 'urutr', 10, 1, '2020-02-11 10:43:18'),
+(6, '', '', 10, 1, '2020-02-11 10:48:17'),
+(7, 'fghjd', 'fjkhk', 10, 1, '2020-02-11 10:49:51'),
+(8, 'fghjd', 'fjkhk', 10, 1, '2020-02-11 10:50:24');
 
 -- --------------------------------------------------------
 
@@ -106,6 +135,12 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `news`
 --
 ALTER TABLE `news`
@@ -126,6 +161,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `category`
   MODIFY `ID` int(45) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `news`
