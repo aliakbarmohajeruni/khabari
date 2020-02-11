@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^rss.xml$ rss.php [NC,L]
