@@ -1,5 +1,7 @@
 <?php
+
 require_once 'include/Service.php';
+
 
 $Service = new Service();
 $Result = $Service->Select('news','`ID` = '.$_GET['ID']);
@@ -7,7 +9,9 @@ if (!$Result) {
 	die('صفحه ی مورد نظر یافت نشد');
 }
 
-
+$comment = new Comment();
+$comment->store($_POST, $_GET);
+$comments = $comment->index();
 
 ?>
 
@@ -51,7 +55,41 @@ if (!$Result) {
 				<p>
 					<h2>متن خبر :</h2>
 					<?php echo $Result['Content']; ?>
+				</p>
+				<div>
+					<form class="" action="" method="post">
 
+						<div class="">
+							<label for="">نام و نام خانوادگی</label>
+							<input type="text" name="name">
+						</div>
+
+						<div class="">
+							<label for="">متن نظر</label>
+							<textarea name="body" rows="8" cols="80"></textarea>
+						</div>
+
+						<div class="">
+							<input type="submit" name="comment" value="ثبت نظر">
+						</div>
+					</form>
+				</div>
+
+				<hr>
+				<?php if($comments): ?>
+				<?php foreach ($comments as $comment): ?>
+				<div class="">
+					<div class="comment-name">
+						<p><?= $comment['name'] ?></p>
+					</div>
+					<div class="comment-time"><?= $comment['created_at'] ?></div>
+					<div class="comment-body">
+							<?= $comment['body'] ?>
+					</div>
+				</div>
+				<hr>
+			<?php endforeach; ?>
+			<?php endif; ?>
 			</section>
 			<a style="visibility:hidden;" href="https://mrcode.ir" target="_blank">آموزش طراحی سایت</a>
 		</div>
